@@ -42,7 +42,7 @@ function onGalleryPictureClick(event) {
   const pictureDescription = event.target.getAttribute("alt");
   const pictureModalWindow = basicLightbox.create(`
   <div class="modal">
-        <img src="${originalPictureLink}" alt="${pictureDescription}" width="1280" height="720"></img>
+        <img src="${originalPictureLink}" alt="${pictureDescription}"></img>
     </div>
   `);
 
@@ -52,10 +52,9 @@ function onGalleryPictureClick(event) {
   const onEscapePress = (event) => {
     if (event.code === "Escape") {
       pictureModalWindow.close();
+      window.removeEventListener("keydown", onEscapePress);
     }
   };
 
-  if (pictureModalWindow) {
-    window.addEventListener("keydown", onEscapePress, { once: true });
-  }
+  window.addEventListener("keydown", onEscapePress);
 }
